@@ -7,32 +7,54 @@ public class Notebook implements INoteBook {
 
 
     private Note[] notes;
+    private int size;
 
     public Notebook(int size) {
         notes=new Note[size];
+        size=0;
     }
 
     @Override
-    public String create(Note note) {
+    public String add(Note note) {
         int i=0;
         while (notes[i]!=null&& i<notes.length){
             i++;
         }
         notes[i]=note;
-
+        size++;
         return "Note created";
     }
 
     @Override
     public String delete(Note note) {
-
-        return null;
+        boolean isDeleted=false;
+        for (int i = 0; i <size() ; i++) {
+            if ( note.getFio().equals(notes[i].getFio())){
+                notes[i]=null;
+                isDeleted=true;
+                size--;
+                for (int j = i; j <size() ; j++) {
+                    notes[j]=notes[j+1];
+                }
+                notes[size]=null;
+            }
+        }
+        if (isDeleted) {
+            return "Note " + note + " deleted";
+        }else {
+            return "not deleted";
+        }
     }
 
     @Override
     public String update(Note note) {
 
         return null;
+    }
+
+    @Override
+    public int size(){
+        return size;
     }
 
     @Override
@@ -47,6 +69,11 @@ public class Notebook implements INoteBook {
 
     @Override
     public Note findByName(String fio) {
+        for (int i = 0; i <size() ; i++) {
+            if(notes[i].getFio().equals(fio)){
+                return notes[i];
+            }
+        }
         return null;
     }
 

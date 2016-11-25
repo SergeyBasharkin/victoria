@@ -15,20 +15,20 @@ public class ViewNote {
         this.notebook = notebook;
     }
 
-    public void create() {
+    public void add() {
         Scanner scanner=new Scanner(System.in);
         System.out.println("Введите ФИО");
         String fio=scanner.nextLine();
         System.out.println("Введите номер");
         String number=scanner.nextLine();
         Note note=new Note(fio,number);
-        String result=notebook.create(note);
+        String result=notebook.add(note);
         System.out.println(result);
     }
 
-    public String delete(Note note) {
-
-        return null;
+    public String delete(String fio) {
+        Note note = new Note(fio);
+        return notebook.delete(note);
     }
 
     public String update(Note note) {
@@ -37,25 +37,25 @@ public class ViewNote {
     }
 
     public void show(String fio) {
-        Note note=findByName(fio);
-        System.out.print("ФИО: "+ note.getFio()+"\n"
-        +"Номер: "+note.getNumber()+"\n"
-        +"День Рождения: "+ note.getBirthday()+"\n");
-
+        System.out.println(findByName(fio));
     }
 
     public void getAll() {
         Note[] notes=notebook.getAll();
-        int i=0;
-        while (i<notes.length && notes[i]!=null){
-
+        for (int i = 0; i <notebook.size() ; i++) {
             System.out.println(notes[i]);
-            i++;
         }
+//        int i=0;
+//        while (i<notes.length && notes[i]!=null){
+//
+//            System.out.println(notes[i]);
+//            i++;
+//        }
     }
 
-    public Note findByName(String fio) {
-        return new Note("Frank","+755522301");
+    public String findByName(String fio) {
+
+        return notebook.findByName(fio).toString();
     }
 
     public Note findByNumber(String number) {
