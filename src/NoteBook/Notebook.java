@@ -14,6 +14,24 @@ public class Notebook implements INoteBook {
         size=0;
     }
 
+    public Notebook(Note[] notes) {
+        this.notes = notes;
+        size=notes.length;
+    }
+
+    public Notebook() {
+        notes=new Note[3];
+        size=3;
+    }
+
+    public Note[] getNotes() {
+        return notes;
+    }
+
+    public void setNotes(Note[] notes) {
+        this.notes = notes;
+    }
+
     @Override
     public String add(Note note) {
         int i=0;

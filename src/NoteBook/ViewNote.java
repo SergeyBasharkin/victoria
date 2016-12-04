@@ -1,6 +1,8 @@
 package NoteBook;
 
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -13,6 +15,19 @@ public class ViewNote {
 
     public ViewNote(INoteBook notebook) {
         this.notebook = notebook;
+    }
+    public boolean save(File file) throws IOException {
+        ObjectOutputStream outputStream= null;
+        Note [] notes= Arrays.copyOfRange(notebook.getNotes(),0,notebook.size());
+        try {
+            outputStream = new ObjectOutputStream(new FileOutputStream(file));
+            outputStream.writeObject(notes);
+            outputStream.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
     }
 
     public void add() {

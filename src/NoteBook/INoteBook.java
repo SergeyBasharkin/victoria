@@ -12,5 +12,6 @@ public interface INoteBook {
     Note[] getAll();
     Note findByName(String fio);
     Note findByNumber(String number);
+    Note[] getNotes();
 
 }

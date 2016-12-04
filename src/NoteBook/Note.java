@@ -1,11 +1,12 @@
 package NoteBook;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by sergey on 20.11.16.
  */
-public class Note {
+public class Note implements Serializable {
     private String fio;
     private String number;
     private Date birthday;
